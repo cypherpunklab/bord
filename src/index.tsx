@@ -1,6 +1,5 @@
 import { Elysia, t } from 'elysia';
 import { html } from '@elysiajs/html';
-import * as elements from 'typed-html';
 import { tw } from 'twind'; //TODO get twind working
 import {
   getBlockHash,
@@ -92,19 +91,19 @@ console.log(
   `🥱 Bord is running at http://${app.server?.hostname}:${app.server?.port}`
 );
 
-const BaseHtml = ({ children }: elements.Children) => `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bord</title>
-  <script src="https://unpkg.com/htmx.org@1.9.3"></script>
-  <script src="https://cdn.tailwindcss.com"></script></head>
-
-${children}
-`;
+const BaseHtml = ({ children }: { children: JSX.Element }) => (
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Bord</title>
+      <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    {children}
+  </html>
+);
 
 const renderBaseHtml = () => (
   <BaseHtml>
